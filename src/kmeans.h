@@ -10,6 +10,7 @@
 #include <string>
 #include <fstream>
 #include <sstream>
+#include <cmath>
 
 /****************************************************************/
 /* Functions												    */
@@ -22,7 +23,11 @@ namespace ADJZAI001 {
             int number;
             float x;
             float y;
-            float operator-(const DataPoint & otherPoint);
+            DataPoint();
+            DataPoint(float x, float y);
+            double operator-(const DataPoint & otherPoint);
+            DataPoint operator+(const DataPoint & otherPoint);
+            DataPoint operator/(int denom);
     };
 
     class Cluster {
