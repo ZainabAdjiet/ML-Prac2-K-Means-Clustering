@@ -24,6 +24,12 @@ DataPoint DataPoint::operator/(int denom) {
     return point;
 }
 
+bool DataPoint::operator==(const DataPoint & otherPoint) const {
+    return this->x == otherPoint.x && this->y == otherPoint.y;
+}
+
+Cluster::Cluster() : number(0), centroid() {}
+
 Cluster::Cluster(int n, DataPoint c) : number(n), centroid(c) {}
 
 void Cluster::findCentroid() {
@@ -32,6 +38,11 @@ void Cluster::findCentroid() {
         sum = sum + point;
     }
     centroid = sum / points.size();
+}
+
+bool Cluster::operator==(const Cluster & otherCluster) const {
+    return this->points == otherCluster.points &&
+           this->centroid == otherCluster.centroid;
 }
 
 std::ostream & ADJZAI001::operator<<(std::ostream & os, const DataPoint & point) {

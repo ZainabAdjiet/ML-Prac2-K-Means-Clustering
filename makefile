@@ -12,3 +12,6 @@ kmeans_cluster: $(OBJ_FILES)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	$(CC) $(FLAGS) $(INCLUDE) -c -o $@ $<
+
+clean:
+	rm -rf $(OBJ_DIR)/*

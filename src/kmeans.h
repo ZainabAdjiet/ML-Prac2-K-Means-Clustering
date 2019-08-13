@@ -29,6 +29,7 @@ namespace ADJZAI001 {
             double operator-(const DataPoint & otherPoint);
             DataPoint operator+(const DataPoint & otherPoint);
             DataPoint operator/(int denom);
+            bool operator==(const DataPoint & otherPoint) const;
     };
 
     class Cluster {
@@ -36,8 +37,10 @@ namespace ADJZAI001 {
             int number;
             DataPoint centroid;
             std::vector<DataPoint> points;
+            Cluster();
             Cluster(int number, DataPoint centroid);
             void findCentroid();
+            bool operator==(const Cluster & otherCluster) const;
     };
 
     std::ostream & operator<<(std::ostream & os, const DataPoint & point);

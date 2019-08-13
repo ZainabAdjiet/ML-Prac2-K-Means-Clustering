@@ -14,10 +14,17 @@ int main(int argc, char const *argv[])
         Cluster(1, dataPoints[0]), Cluster(2, dataPoints[3]), Cluster(3, dataPoints[6])
     };
 
-    assignClusters(clusters, dataPoints);
-
-    for (Cluster c : clusters) {
-        cout << c << endl;
+    vector<Cluster> prevClusters;
+    int iter = 1;
+    while (clusters != prevClusters) {
+        prevClusters = clusters;
+        assignClusters(clusters, dataPoints);
+        cout << "Iteration " << iter << endl;
+        for (Cluster c : clusters) {
+            cout << c << endl;
+        }
+        cout << endl;
+        ++iter;
     }
 
     return 0;
