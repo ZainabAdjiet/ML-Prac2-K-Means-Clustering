@@ -17,36 +17,34 @@
 /* Functions												    */
 /****************************************************************/
 
-namespace ADJZAI001 {
+namespace ADJZAI001_kmeans {
 
-    class DataPoint {
-        public:
-            int number;
-            float x;
-            float y;
-            DataPoint();
-            DataPoint(int number, float x, float y);
-            double operator-(const DataPoint & otherPoint);
-            DataPoint operator+(const DataPoint & otherPoint);
-            DataPoint operator/(int denom);
-            bool operator==(const DataPoint & otherPoint) const;
+    struct data_point {
+        int number;
+        float x;
+        float y;
+        data_point();
+        data_point(int number, float x, float y);
+        double operator-(const data_point & other);
+        data_point operator+(const data_point & other);
+        data_point operator/(int denom);
+        bool operator==(const data_point & other) const;
     };
 
-    class Cluster {
-        public:
-            int number;
-            DataPoint centroid;
-            std::vector<DataPoint> points;
-            Cluster();
-            Cluster(int number, DataPoint centroid);
-            void findCentroid();
-            bool operator==(const Cluster & otherCluster) const;
+    struct cluster {
+        int number;
+        data_point centroid;
+        std::vector<data_point> points;
+        cluster();
+        cluster(int number, data_point centroid);
+        void find_centroid();
+        bool operator==(const cluster & other) const;
     };
 
-    std::ostream & operator<<(std::ostream & os, const DataPoint & point);
-    std::ostream & operator<<(std::ostream & os, const Cluster & cluster);
-    void assignClusters(std::vector<Cluster> & clusters, std::vector<DataPoint> & points);
-
+    std::ostream & operator<<(std::ostream & os, const data_point & point);
+    std::ostream & operator<<(std::ostream & os, const cluster & cluster);
+    void load_data(std::vector<data_point> & points, std::string filename);
+    void assign_clusters(std::vector<cluster> & clusters, const std::vector<data_point> & points);
 }
 
 #endif

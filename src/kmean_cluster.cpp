@@ -1,31 +1,36 @@
 #include "kmeans.h"
 
-using namespace ADJZAI001;
+using namespace ADJZAI001_kmeans;
 using namespace std;
 
-int main(int argc, char const *argv[])
-{
-    vector<DataPoint> dataPoints = {
-        DataPoint(1,2,10), DataPoint(2,2,5), DataPoint(3,8,4), DataPoint(4,5,8),
-        DataPoint(5,7,5), DataPoint(6,6,4), DataPoint(7,1,2), DataPoint(8,4,9)
-    };
+int main(int argc, char const *argv[]) {
 
-    vector<Cluster> clusters = {
-        Cluster(1, dataPoints[0]), Cluster(2, dataPoints[3]), Cluster(3, dataPoints[6])
-    };
+    if (argc > 1) {
+        vector<data_point> data_points;
+        load_data(data_points, argv[1]);
 
-    vector<Cluster> prevClusters;
-    int iter = 1;
-    while (clusters != prevClusters) {
-        prevClusters = clusters;
-        assignClusters(clusters, dataPoints);
-        cout << "Iteration " << iter << endl;
-        for (Cluster c : clusters) {
-            cout << c << endl;
-        }
-        cout << endl;
-        ++iter;
+        vector<cluster> clusters = {
+            cluster(1, data_points[0]), cluster(2, data_points[3]), cluster(3, data_points[6])
+        };
+
+        vector<cluster> prev_clusters;
+        int iter = 1;
+        do {
+            prev_clusters = clusters;
+            assign_clusters(clusters, data_points);
+            cout << "Iteration " << iter << ":" << endl;
+            for (cluster c : clusters) {
+                cout << c << endl;
+            }
+            cout << endl;
+            ++iter;
+        } while (clusters != prev_clusters);
+
+        return 0;
     }
-
-    return 0;
+    else {
+        cout << "no file name specified" << endl;
+        return 1;
+    }
+    
 }
