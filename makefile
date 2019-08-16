@@ -13,5 +13,8 @@ kmeans_cluster: $(OBJ_FILES)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	$(CC) $(FLAGS) $(INCLUDE) -c -o $@ $<
 
+run:
+	./kmeans_cluster data.txt
+
 clean:
-	rm -rf $(OBJ_DIR)/*
+	rm -rf $(OBJ_DIR)/* kmeans_cluster

@@ -6,10 +6,12 @@ data_point::data_point() : x(0), y(0) {}
 
 data_point::data_point(int n, float x, float y) : number(n), x(x), y(y) {}
 
+//calculates Euclidean distance between x,y points
 double data_point::operator-(const data_point & other) {
     return sqrt(pow(this->x - other.x, 2) + pow(this->y - other.y, 2));
 }
 
+// sums 2 x,y points
 data_point data_point::operator+(const data_point & other) {
     data_point point;
     point.x = this->x + other.x;
@@ -17,6 +19,7 @@ data_point data_point::operator+(const data_point & other) {
     return point;
 }
 
+// used to calculate mean of cluster
 data_point data_point::operator/(int denom) {
     data_point point;
     point.x = this->x / denom;
@@ -32,6 +35,7 @@ cluster::cluster() : number(0), centroid() {}
 
 cluster::cluster(int n, data_point c) : number(n), centroid(c) {}
 
+// recalculates centroid for cluster after points are assigned
 void cluster::find_centroid() {
     data_point sum;
     for (data_point point : points) {
@@ -45,11 +49,13 @@ bool cluster::operator==(const cluster & other) const {
            this->centroid == other.centroid;
 }
 
+// prints out point in format "(x, y)"
 std::ostream & ADJZAI001_kmeans::operator<<(std::ostream & os, const data_point & point) {
     os << "(" << point.x << ", " << point.y << ")";
     return os;
 }
 
+// prints out cluster points and centroid
 std::ostream & ADJZAI001_kmeans::operator<<(std::ostream & os, const cluster & cluster) {
     os << "Cluster " << cluster.number << ": ";
 
@@ -63,6 +69,7 @@ std::ostream & ADJZAI001_kmeans::operator<<(std::ostream & os, const cluster & c
     return os;
 }
 
+// loads data points from text file
 void ADJZAI001_kmeans::load_data(std::vector<data_point> & points, std::string filename) {
     std::ifstream data(filename);
     std::string line;
@@ -84,8 +91,12 @@ void ADJZAI001_kmeans::load_data(std::vector<data_point> & points, std::string f
 
         data.close();
     }
+    else {
+        std::cout << "could not load data from " << filename << std::endl;
+    }
 }
 
+// assigns data points to nearest cluster based on distance from their centroids
 void ADJZAI001_kmeans::assign_clusters(std::vector<cluster> & clusters, const std::vector<data_point> & points) {
     for (int c = 0; c < clusters.size(); ++c) {
         clusters[c].points.clear();
@@ -105,6 +116,7 @@ void ADJZAI001_kmeans::assign_clusters(std::vector<cluster> & clusters, const st
         clusters[nearest_cluster].points.push_back(p);
     }
 
+    // recalculates centroid for new set of points
     for (int c = 0; c < clusters.size(); ++c) {
         clusters[c].find_centroid();
     }
