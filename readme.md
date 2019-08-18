@@ -9,4 +9,4 @@
 ## How to run:
 1. Run 'make'
 2. Run 'make run' to run:
-    './kmeans_cluster data.txt'
+    './kmeans_algorithm data.txt'
