@@ -2,7 +2,7 @@
 #define KMEANS_H
 
 /****************************************************************/
-/* Includes														*/
+/* Includes
 /****************************************************************/
 
 #include <iostream>
@@ -14,7 +14,7 @@
 #include <limits>
 
 /****************************************************************/
-/* Functions												    */
+/* Functions
 /****************************************************************/
 
 namespace ADJZAI001_kmeans {
@@ -41,10 +41,10 @@ namespace ADJZAI001_kmeans {
         bool operator==(const cluster & other) const;
     };
 
-    std::ostream & operator<<(std::ostream & os, const data_point & point);
-    std::ostream & operator<<(std::ostream & os, const cluster & cluster);
     void load_data(std::vector<data_point> & points, std::string filename);
     void assign_clusters(std::vector<cluster> & clusters, const std::vector<data_point> & points);
+    std::ostream & operator<<(std::ostream & os, const data_point & point);
+    std::ostream & operator<<(std::ostream & os, const cluster & cluster);
 }
 
 #endif

@@ -1,7 +1,15 @@
+/****************************************************************/
+/* Includes
+/****************************************************************/
+
 #include "kmeans.h"
 
 using namespace ADJZAI001_kmeans;
 using namespace std;
+
+/****************************************************************/
+/* Main K-means Clustering program
+/****************************************************************/
 
 int main(int argc, char const *argv[]) {
 
@@ -36,16 +44,16 @@ int main(int argc, char const *argv[]) {
             out_file << "Iterations to converge: " << --iter << endl;
 
             out_file.close();
+            cout << "output written to 'output.txt'" << endl;
         }
         else {
-            cout << "could not write to output.txt" << endl;
+            cout << "could not write to 'output.txt'" << endl;
             return 1;
         }
-
         return 0;
     }
     else {
-        cout << "no file name specified" << endl;
+        cout << "no input file name specified" << endl;
         return 1;
     }
     
